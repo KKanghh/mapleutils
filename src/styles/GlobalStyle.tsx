@@ -23,9 +23,8 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
-  h1 {
+  * {
     font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-    font-size: 25px;
   }
 `;
 

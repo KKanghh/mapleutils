@@ -1,10 +1,10 @@
-import Card from "./components/Card";
+import MainCard from "./components/MainCard";
 
 const MainView = () => {
   return (
     <>
-      <Card href="/seed">seed</Card>
-      <Card href="/b">b</Card>
+      <MainCard href="/seed">seed</MainCard>
+      <MainCard href="/b">b</MainCard>
     </>
   );
 };
