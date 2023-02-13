@@ -67,7 +67,6 @@ const RingSelect: React.FC<RingSelectProps> = ({
   const nameRef = useRef<any>(null);
   const levelRef = useRef<any>(null);
   const dispatch = useDispatch();
-  const isOpen = useSelector<RootState, boolean>((state) => state.modal.isOpen);
 
   const levelList = useMemo<number[]>(() => {
     if (isNotRing(selected.name)) {
@@ -79,9 +78,6 @@ const RingSelect: React.FC<RingSelectProps> = ({
 
   const onChangeName = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      if (e === null) {
-        return;
-      }
       onSelect((prev) => {
         if (isNotRing(e.target.value)) {
           return { name: e.target.value, level: 0 };
@@ -96,7 +92,7 @@ const RingSelect: React.FC<RingSelectProps> = ({
   const onChangeLevel = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
       onSelect((prev) => {
-        return { ...prev, level: +e.target.value };
+        return { ...prev, level: +e.target.value || 0 };
       });
     },
     [onSelect]
@@ -105,17 +101,15 @@ const RingSelect: React.FC<RingSelectProps> = ({
   const SubmitHandler = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      console.log(nameRef.current, nameRef.current[0]);
-      if (
-        selected.name === "" ||
-        selected.name === "반지" ||
-        (!isNotRing(selected.name) && !selected.level)
-      ) {
-        dispatch(modalActions.open("입력값이 invalid"));
+      if (selected.name === "" || selected.name === "반지") {
+        dispatch(modalActions.open("반지를 입력해 주세요."));
+      }
+      if (!isNotRing(selected.name) && !selected.level) {
+        dispatch(modalActions.open("레벨을 입력해 주세요."));
         return;
       }
       if (target.find((el) => el.name === selected.name)) {
-        dispatch(modalActions.open("no"));
+        dispatch(modalActions.open("이미 목록에 존재합니다."));
         return;
       }
       setTarget((prev) => [...prev, selected]);

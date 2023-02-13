@@ -1,5 +1,6 @@
 import Card from "@/components/Card/Card";
 import styled from "styled-components";
+import Button from "@/components/Button/Button";
 
 const TargetCard = styled(Card)`
   display: flex;
@@ -22,8 +23,25 @@ const Option = styled.option`
   font-size: 20px;
 `;
 
-const Targets = styled.div`
+const TargetDiv = styled.div`
   text-align: center;
 `;
 
-export { TargetCard, RingForm, SelectTemplate, Option, Targets };
+const CloseButton = styled(Button)`
+  background-color: transparent;
+`;
+
+const CountDiv = styled.div`
+  text-align: center;
+  margin-bottom: 5px;
+`;
+
+export {
+  TargetCard,
+  RingForm,
+  SelectTemplate,
+  Option,
+  TargetDiv,
+  CloseButton,
+  CountDiv,
+};

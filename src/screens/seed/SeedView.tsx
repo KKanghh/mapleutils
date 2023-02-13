@@ -3,7 +3,7 @@ import RingSelect from "./components/RingSelect";
 import { Dispatch, SetStateAction, LegacyRef } from "react";
 import Ring from "@/types/Ring";
 import { TargetCard } from "./components";
-import Target from "./components/Target";
+import Targets from "./components/Targets";
 
 export interface SeedViewProps {
   selected: Ring;
@@ -26,7 +26,7 @@ const SeedView: React.FC<SeedViewProps> = ({
         target={target}
         setTarget={setTarget}
       />
-      <Target target={target} />
+      <Targets target={target} setTarget={setTarget} />
     </>
   );
 };

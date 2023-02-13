@@ -7,7 +7,7 @@ const SeedController = () => {
   const [target, setTarget] = useState<Ring[]>([]);
   const [selected, setSelected] = useState<Ring>({
     name: "",
-    level: null,
+    level: 0,
   });
 
   const viewProps: SeedViewProps = {

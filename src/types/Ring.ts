@@ -1,6 +1,6 @@
 interface Ring {
   name: string;
-  level: number | null;
+  level: number;
 }
 
 export default Ring;

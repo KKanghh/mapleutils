@@ -23,21 +23,20 @@ const NavLink = styled(Link)<{ active: number }>`
   font-size: 20px;
 `;
 
+const menus = [
+  { id: 1, name: "시드", path: "/seed" },
+  { id: 2, name: "B", path: "/b" },
+  { id: 3, name: "C", path: "/c" },
+  { id: 4, name: "D", path: "/d" },
+  { id: 5, name: "E", path: "/e" },
+];
+
 const Header: React.FC = () => {
   const router = useRouter();
-  const menus = useMemo(
-    () => [
-      { id: 1, name: "A", path: "/seed" },
-      { id: 2, name: "B", path: "/" },
-      { id: 3, name: "C", path: "/" },
-      { id: 4, name: "D", path: "/" },
-      { id: 5, name: "E", path: "/" },
-    ],
-    []
-  );
+
   return (
     <Container>
-      <h1>헤더</h1>
+      <h1>Maple Simulator</h1>
       {menus.map((menu) => (
         <NavLink
           href={menu.path}
