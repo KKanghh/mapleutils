@@ -4,16 +4,23 @@ import SelectOption from "@/types/SelectOption";
 import Button from "@/components/Button/Button";
 import { RingForm } from ".";
 import Select from "./Select";
+import { useDispatch, useSelector } from "react-redux";
+import { modalActions } from "@/store/modal";
+import isNotRing from "@/utils/isNotRing";
+import ReactModal from "react-modal";
+import store, { RootState } from "@/store";
 
 interface RingSelectProps {
   selected: Ring;
   onSelect: Dispatch<SetStateAction<Ring>>;
+  target: Ring[];
   setTarget: Dispatch<SetStateAction<Ring[]>>;
 }
 
 const RingSelect: React.FC<RingSelectProps> = ({
   selected,
   onSelect,
+  target,
   setTarget,
 }) => {
   const ringNameList = useMemo<string[]>(
@@ -59,15 +66,11 @@ const RingSelect: React.FC<RingSelectProps> = ({
 
   const nameRef = useRef<any>(null);
   const levelRef = useRef<any>(null);
+  const dispatch = useDispatch();
+  const isOpen = useSelector<RootState, boolean>((state) => state.modal.isOpen);
 
   const levelList = useMemo<number[]>(() => {
-    if (
-      selected.name === "" ||
-      selected.name === "오션글로우 이어링" ||
-      selected.name === "깨진 상자 조각 5개" ||
-      selected.name === "시드 포인트 보따리 5개" ||
-      selected.name === "경험치 2배 쿠폰(15분) 3개"
-    ) {
+    if (isNotRing(selected.name)) {
       return [];
     } else {
       return [1, 2, 3, 4];
@@ -76,19 +79,11 @@ const RingSelect: React.FC<RingSelectProps> = ({
 
   const onChangeName = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      console.dir(levelRef.current);
-
       if (e === null) {
         return;
       }
       onSelect((prev) => {
-        if (
-          e.target.value === "" ||
-          e.target.value === "오션글로우 이어링" ||
-          e.target.value === "깨진 상자 조각 5개" ||
-          e.target.value === "시드 포인트 보따리 5개" ||
-          e.target.value === "경험치 2배 쿠폰(15분) 3개"
-        ) {
+        if (isNotRing(e.target.value)) {
           return { name: e.target.value, level: 0 };
         } else {
           return { ...prev, name: e.target.value };
@@ -100,9 +95,6 @@ const RingSelect: React.FC<RingSelectProps> = ({
 
   const onChangeLevel = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      if (e === null) {
-        return;
-      }
       onSelect((prev) => {
         return { ...prev, level: +e.target.value };
       });
@@ -113,9 +105,24 @@ const RingSelect: React.FC<RingSelectProps> = ({
   const SubmitHandler = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      console.log(nameRef.current, nameRef.current[0]);
+      if (
+        selected.name === "" ||
+        selected.name === "반지" ||
+        (!isNotRing(selected.name) && !selected.level)
+      ) {
+        dispatch(modalActions.open("입력값이 invalid"));
+        return;
+      }
+      if (target.find((el) => el.name === selected.name)) {
+        dispatch(modalActions.open("no"));
+        return;
+      }
       setTarget((prev) => [...prev, selected]);
+      nameRef.current.value = nameRef.current[0].value;
+      levelRef.current.value = levelRef.current[0].value;
     },
-    [selected, setTarget]
+    [selected, setTarget, target, dispatch]
   );
 
   return (

@@ -15,6 +15,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 0px 5px 1px black;
+  z-index: 10;
 `;
 
 const NavLink = styled(Link)<{ active: number }>`

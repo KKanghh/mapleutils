@@ -20,12 +20,13 @@ const SeedView: React.FC<SeedViewProps> = ({
 }) => {
   return (
     <>
-      <Target target={target} />
       <RingSelect
         selected={selected}
         onSelect={onSelect}
+        target={target}
         setTarget={setTarget}
       />
+      <Target target={target} />
     </>
   );
 };

@@ -12,11 +12,11 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ id, placeholder, options, onChange }, ref) => {
     return (
       <SelectTemplate id={id} onChange={onChange} ref={ref}>
-        <Option>{placeholder}</Option>
+        <Option value={placeholder}>{placeholder}</Option>
         {options.map((option) => (
-          <option key={option} value={option}>
+          <Option key={option} value={option}>
             {option}
-          </option>
+          </Option>
         ))}
       </SelectTemplate>
     );
