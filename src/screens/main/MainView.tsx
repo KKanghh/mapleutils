@@ -3,8 +3,8 @@ import MainCard from "./components/MainCard";
 const MainView = () => {
   return (
     <>
-      <MainCard href="/seed">seed</MainCard>
-      <MainCard href="/b">b</MainCard>
+      <MainCard href="/seed">시드</MainCard>
+      {/* <MainCard href="/b">b</MainCard> */}
     </>
   );
 };

@@ -25,10 +25,10 @@ const NavLink = styled(Link)<{ active: number }>`
 
 const menus = [
   { id: 1, name: "시드", path: "/seed" },
-  { id: 2, name: "B", path: "/b" },
-  { id: 3, name: "C", path: "/c" },
-  { id: 4, name: "D", path: "/d" },
-  { id: 5, name: "E", path: "/e" },
+  // { id: 2, name: "개", path: "/b" },
+  // { id: 3, name: "발", path: "/c" },
+  // { id: 4, name: "예", path: "/d" },
+  // { id: 5, name: "정", path: "/e" },
 ];
 
 const Header: React.FC = () => {
@@ -36,7 +36,9 @@ const Header: React.FC = () => {
 
   return (
     <Container>
-      <h1>Maple Simulator</h1>
+      <Link href="/">
+        <h1>Maple Simulator</h1>
+      </Link>
       {menus.map((menu) => (
         <NavLink
           href={menu.path}
