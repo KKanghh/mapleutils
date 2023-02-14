@@ -9,64 +9,19 @@ import { modalActions } from "@/store/modal";
 import isNotRing from "@/utils/isNotRing";
 import ReactModal from "react-modal";
 import store, { RootState } from "@/store";
+import { ringList } from "@/utils/ringList";
+import { seedActions } from "@/store/seed";
 
 interface RingSelectProps {
   selected: Ring;
   onSelect: Dispatch<SetStateAction<Ring>>;
-  target: Ring[];
-  setTarget: Dispatch<SetStateAction<Ring[]>>;
 }
 
-const RingSelect: React.FC<RingSelectProps> = ({
-  selected,
-  onSelect,
-  target,
-  setTarget,
-}) => {
-  const ringNameList = useMemo<string[]>(
-    () => [
-      "리스트레인트 링",
-      "웨폰퍼프 - S링",
-      "웨폰퍼프 - I링",
-      "웨폰퍼프 - L링",
-      "웨폰퍼프 - D링",
-      "얼티메이덤 링",
-      "리스크테이커 링",
-      "링 오브 썸",
-      "크리데미지 링",
-      "크라이시스 - HM링",
-      "타워인헨스 링",
-      "버든리프트 링",
-      "오버패스 링",
-      "레벨퍼프 - S링",
-      "레벨퍼프 - D링",
-      "레벨퍼프 - I링",
-      "레벨퍼프 - L링",
-      "헬스컷 링",
-      "크리디펜스 링",
-      "리밋 링",
-      "듀라빌리티 링",
-      "리커버디펜스 링",
-      "실드스와프 링",
-      "마나컷 링",
-      "크라이시스 - H링",
-      "크라이시스 - M링",
-      "크리쉬프트 링",
-      "스탠스쉬프트 링",
-      "리커버스탠스 링",
-      "스위프트 링",
-      "리플렉티브 링",
-      "오션글로우 이어링",
-      "깨진 상자 조각 5개",
-      "시드 포인트 보따리 5개",
-      "경험치 2배 쿠폰(15분) 3개",
-    ],
-    []
-  );
-
+const RingSelect: React.FC<RingSelectProps> = ({ selected, onSelect }) => {
   const nameRef = useRef<any>(null);
   const levelRef = useRef<any>(null);
   const dispatch = useDispatch();
+  const targets = useSelector<RootState, Ring[]>((state) => state.seed.targets);
 
   const levelList = useMemo<number[]>(() => {
     if (isNotRing(selected.name)) {
@@ -108,15 +63,15 @@ const RingSelect: React.FC<RingSelectProps> = ({
         dispatch(modalActions.open("레벨을 입력해 주세요."));
         return;
       }
-      if (target.find((el) => el.name === selected.name)) {
+      if (targets.find((el) => el.name === selected.name)) {
         dispatch(modalActions.open("이미 목록에 존재합니다."));
         return;
       }
-      setTarget((prev) => [...prev, selected]);
+      dispatch(seedActions.add(selected));
       nameRef.current.value = nameRef.current[0].value;
       levelRef.current.value = levelRef.current[0].value;
     },
-    [selected, setTarget, target, dispatch]
+    [selected, dispatch, targets]
   );
 
   return (
@@ -125,13 +80,13 @@ const RingSelect: React.FC<RingSelectProps> = ({
         id="ring"
         ref={nameRef}
         placeholder="반지"
-        options={ringNameList}
+        options={ringList}
         onChange={onChangeName}
       />
       <Select
         id="level"
         ref={levelRef}
-        placeholder={"레벨"}
+        placeholder="레벨"
         options={levelList}
         onChange={onChangeLevel}
       />

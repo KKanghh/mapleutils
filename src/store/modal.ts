@@ -5,7 +5,7 @@ export interface ModalState {
   message: string;
 }
 
-const initialModalState = { isOpen: false, message: "" };
+const initialModalState: ModalState = { isOpen: false, message: "" };
 
 const modalSlice = createSlice({
   name: "modal",

@@ -1,4 +1,7 @@
+import { RootState } from "@/store";
 import Ring from "@/types/Ring";
+import { Dispatch, SetStateAction } from "react";
+import { useSelector } from "react-redux";
 
 const ringList = [
   "리스트레인트 링",
@@ -60,50 +63,10 @@ const shiningPercents = [
   581395, 581395,
 ];
 
-const openBox = (targets: Ring[]) => {
-  const ringTotalPercent = ringPercents.reduce((a, c) => a + c);
-  let cnt = 0;
-  while (true) {
-    cnt++;
-    const ring: Ring = { name: "", level: 0 };
-    const ringPercent = Math.random() * ringTotalPercent;
-    let ringPercentSum = 0;
-    for (let i = 0; i < ringPercents.length; i++) {
-      ringPercentSum += ringPercents[i];
-      if (ringPercent < ringPercentSum) {
-        ring.name = ringList[i];
-        break;
-      }
-    }
-    const levelPercent = Math.random() * 100;
-    let levelPercentSum = 0;
-    for (let i = 0; i < levelPercents.length; i++) {
-      levelPercentSum += levelPercents[i];
-      if (levelPercent < levelPercentSum) {
-        ring.level = i + 1;
-        break;
-      }
-    }
-    console.log(ring);
-    let find = false;
-    for (const target of targets) {
-      if (target.name === ring.name && target.level <= ring.level) {
-        find = true;
-        break;
-      }
-    }
-
-    if (find) break;
-  }
-
-  return cnt;
-};
-
 export {
   ringList,
   levelPercents,
   ringPercents,
   hiddenPercents,
   shiningPercents,
-  openBox,
 };

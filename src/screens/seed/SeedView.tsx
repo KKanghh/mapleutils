@@ -1,32 +1,36 @@
-import Card from "@/components/Card/Card";
 import RingSelect from "./components/RingSelect";
-import { Dispatch, SetStateAction, LegacyRef } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Ring from "@/types/Ring";
-import { TargetCard } from "./components";
 import Targets from "./components/Targets";
+import Open from "./components/Open";
 
 export interface SeedViewProps {
   selected: Ring;
   onSelect: Dispatch<SetStateAction<Ring>>;
-  target: Ring[];
-  setTarget: Dispatch<SetStateAction<Ring[]>>;
+  results: Ring[];
+  cntList: number[];
+  buttonClickHandler: () => void;
+  setOpenHidden: Dispatch<SetStateAction<boolean>>;
 }
 
 const SeedView: React.FC<SeedViewProps> = ({
   selected,
   onSelect,
-  target,
-  setTarget,
+  results,
+  cntList,
+  buttonClickHandler,
+  setOpenHidden,
 }) => {
   return (
     <>
-      <RingSelect
-        selected={selected}
-        onSelect={onSelect}
-        target={target}
-        setTarget={setTarget}
+      <RingSelect selected={selected} onSelect={onSelect} />
+      <Targets />
+      <Open
+        results={results}
+        buttonClickHandler={buttonClickHandler}
+        cntList={cntList}
+        setOpenHidden={setOpenHidden}
       />
-      <Targets target={target} setTarget={setTarget} />
     </>
   );
 };
