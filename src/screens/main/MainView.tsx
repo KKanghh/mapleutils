@@ -4,7 +4,7 @@ const MainView = () => {
   return (
     <>
       <MainCard href="/seed">시드</MainCard>
-      {/* <MainCard href="/b">b</MainCard> */}
+      <MainCard href="/cube">큐브</MainCard>
     </>
   );
 };

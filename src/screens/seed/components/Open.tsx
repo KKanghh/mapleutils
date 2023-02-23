@@ -85,21 +85,20 @@ const Open: React.FC<OpenProps> = ({
           <FindButton onClick={buttonClickHandler}>시작</FindButton>
         </>
       )}
-      {results.length > 0 &&
-        (openDetail ? (
-          <DetailCard w="55%" h="30px">
-            <AlignDiv onClick={setOpenDetailFalse}>
-              닫기 <AiFillCaretUp />
-            </AlignDiv>
-            {results.map((result, index) => (
-              <div key={index}>
-                {result.name} {!isNotRing(result.name) && `${result.level}레벨`}
-              </div>
-            ))}
-          </DetailCard>
-        ) : (
-          <ShowDetail setOpenDetailTrue={setOpenDetailTrue} />
-        ))}
+      {openDetail ? (
+        <DetailCard w="55%" h="30px">
+          <AlignDiv onClick={setOpenDetailFalse}>
+            닫기 <AiFillCaretUp />
+          </AlignDiv>
+          {results.map((result, index) => (
+            <div key={index}>
+              {result.name} {!isNotRing(result.name) && `${result.level}레벨`}
+            </div>
+          ))}
+        </DetailCard>
+      ) : (
+        <ShowDetail setOpenDetailTrue={setOpenDetailTrue} />
+      )}
     </>
   );
 };

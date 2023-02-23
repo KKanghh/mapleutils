@@ -3,7 +3,7 @@ import Ring from "@/types/Ring";
 import SelectOption from "@/types/SelectOption";
 import Button from "@/components/Button/Button";
 import { RingForm } from ".";
-import Select from "./Select";
+import Select from "../../../components/Select/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "@/store/modal";
 import isNotRing from "@/utils/isNotRing";
@@ -23,16 +23,22 @@ const RingSelect: React.FC<RingSelectProps> = ({ selected, onSelect }) => {
   const dispatch = useDispatch();
   const targets = useSelector<RootState, Ring[]>((state) => state.seed.targets);
 
-  const levelList = useMemo<number[]>(() => {
+  const levelList = useMemo<{ name: number; value: number }[]>(() => {
     if (isNotRing(selected.name)) {
       return [];
     } else {
-      return [1, 2, 3, 4];
+      return [
+        { name: 1, value: 1 },
+        { name: 2, value: 2 },
+        { name: 3, value: 3 },
+        { name: 4, value: 4 },
+      ];
     }
   }, [selected.name]);
 
   const onChangeName = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
+      console.log(e.target.value);
       onSelect((prev) => {
         if (isNotRing(e.target.value)) {
           return { name: e.target.value, level: 0 };
@@ -80,7 +86,7 @@ const RingSelect: React.FC<RingSelectProps> = ({ selected, onSelect }) => {
         id="ring"
         ref={nameRef}
         placeholder="반지"
-        options={ringList}
+        options={ringList.map((ring) => ({ name: ring, value: ring }))}
         onChange={onChangeName}
       />
       <Select

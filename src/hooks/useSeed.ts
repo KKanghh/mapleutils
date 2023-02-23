@@ -59,8 +59,8 @@ const useSeed = (
       }
 
       setResults((prev) => [
-        ...prev,
         { name: "반지 상자 개봉! " + ring.name, level: ring.level },
+        ...prev,
       ]);
       for (const target of targets) {
         if (target.name === ring.name && target.level <= ring.level) {
@@ -96,7 +96,7 @@ const useSeed = (
       }
     }
 
-    setResults((prev) => [...prev, ring]);
+    setResults((prev) => [ring, ...prev]);
 
     for (const target of targets) {
       if (target.name === ring.name && target.level <= ring.level) {

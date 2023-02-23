@@ -21,16 +21,6 @@ const RingForm = styled.form`
   justify-content: space-between;
 `;
 
-const SelectTemplate = styled.select`
-  width: 40%;
-  text-align: center;
-  font-size: 20px;
-`;
-
-const Option = styled.option`
-  font-size: 20px;
-`;
-
 const TargetDiv = styled.div`
   text-align: center;
 `;
@@ -77,8 +67,6 @@ export {
   TargetCard,
   DetailCard,
   RingForm,
-  SelectTemplate,
-  Option,
   TargetDiv,
   CloseButton,
   CenterDiv,

@@ -1,5 +1,15 @@
-import { SelectTemplate, Option } from ".";
 import React from "react";
+import styled from "styled-components";
+
+const SelectTemplate = styled.select`
+  width: 40%;
+  text-align: center;
+  font-size: 20px;
+`;
+
+const Option = styled.option`
+  font-size: 20px;
+`;
 
 interface SelectProps {
   id: string;
@@ -12,10 +22,10 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ id, placeholder, options, onChange }, ref) => {
     return (
       <SelectTemplate id={id} onChange={onChange} ref={ref}>
-        <Option value={placeholder}>{placeholder}</Option>
+        <Option value={""}>{placeholder}</Option>
         {options.map((option) => (
-          <Option key={option} value={option}>
-            {option}
+          <Option key={option.value} value={option.value}>
+            {option.name}
           </Option>
         ))}
       </SelectTemplate>

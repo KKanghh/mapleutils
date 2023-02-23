@@ -1,8 +1,3 @@
-import { RootState } from "@/store";
-import Ring from "@/types/Ring";
-import { Dispatch, SetStateAction } from "react";
-import { useSelector } from "react-redux";
-
 const ringList = [
   "리스트레인트 링",
   "웨폰퍼프 - S링",

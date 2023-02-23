@@ -20,12 +20,22 @@ const Container = styled.div`
 
 const NavLink = styled(Link)<{ active: number }>`
   color: ${(props) => (props.active ? "#F5EEDF" : "#f7e34d")};
+  font-weight: ${(props) => (props.active ? 700 : 400)};
   font-size: 20px;
+`;
+
+const LinkList = styled.ul`
+  list-style: none;
+`;
+
+const List = styled.li`
+  float: left;
+  margin: 0 20px;
 `;
 
 const menus = [
   { id: 1, name: "시드", path: "/seed" },
-  // { id: 2, name: "개", path: "/b" },
+  { id: 2, name: "큐브", path: "/cube" },
   // { id: 3, name: "발", path: "/c" },
   // { id: 4, name: "예", path: "/d" },
   // { id: 5, name: "정", path: "/e" },
@@ -39,15 +49,19 @@ const Header: React.FC = () => {
       <Link href="/">
         <h1>Maple Simulator</h1>
       </Link>
-      {menus.map((menu) => (
-        <NavLink
-          href={menu.path}
-          key={menu.id}
-          active={router.pathname === menu.path ? 1 : 0}
-        >
-          {menu.name}
-        </NavLink>
-      ))}
+      <LinkList>
+        {menus.map((menu) => (
+          <List key={menu.id}>
+            <NavLink
+              href={menu.path}
+              key={menu.id}
+              active={router.pathname === menu.path ? 1 : 0}
+            >
+              {menu.name}
+            </NavLink>
+          </List>
+        ))}
+      </LinkList>
     </Container>
   );
 };
