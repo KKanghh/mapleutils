@@ -5,6 +5,7 @@ const SelectTemplate = styled.select`
   width: 40%;
   text-align: center;
   font-size: 20px;
+  padding: 5px;
 `;
 
 const Option = styled.option`

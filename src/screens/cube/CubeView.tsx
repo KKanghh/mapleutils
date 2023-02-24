@@ -6,13 +6,15 @@ import OptionInput from "./components/OptionInput";
 
 export interface CubeViewProps {
   setCube: Dispatch<SetStateAction<string>>;
+  equip: { name: string; level: number };
+  setEquip: Dispatch<SetStateAction<{ name: string; level: number }>>;
 }
 
-const CubeView: React.FC<CubeViewProps> = ({ setCube }) => {
+const CubeView: React.FC<CubeViewProps> = ({ setCube, equip, setEquip }) => {
   return (
     <>
       <CubeRadio onChange={setCube} />
-      <EquipInput />
+      <EquipInput equip={equip} onChange={setEquip} />
       <OptionInput />
     </>
   );
