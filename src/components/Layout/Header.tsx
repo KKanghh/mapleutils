@@ -35,7 +35,7 @@ const List = styled.li`
 
 const menus = [
   { id: 1, name: "시드", path: "/seed" },
-  { id: 2, name: "큐브", path: "/cube" },
+  // { id: 2, name: "큐브", path: "/cube" },
   // { id: 3, name: "발", path: "/c" },
   // { id: 4, name: "예", path: "/d" },
   // { id: 5, name: "정", path: "/e" },
